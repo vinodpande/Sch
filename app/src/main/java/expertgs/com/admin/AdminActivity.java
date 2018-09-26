@@ -104,6 +104,7 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
                 if (view.getId() == list.getId()) {
                     if (list.getView().getVisibility() == View.VISIBLE) {
                         list.getView().setVisibility(View.GONE);
+                        LIST_VIEW_ALL.setVisibility(View.GONE);
                         for (int j = 0; j < LAYOUT_CONTAINER.size(); j++) {
                             AdminListLayout sublist = LAYOUT_CONTAINER.get(j);
                             if (view.getId() == sublist.getId()) {
@@ -114,6 +115,7 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
                         }
                     } else {
                         list.getView().setVisibility(View.VISIBLE);
+                        LIST_VIEW_ALL.setVisibility(View.VISIBLE);
                         //call get data when view is visible
                         getDataFromService(view.getId());
                         for (int j = 0; j < LAYOUT_CONTAINER.size(); j++) {
@@ -179,6 +181,34 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
             case R.id.buttonUniversityContainer:
                 WebSchoolAttendanceAPI.getUniversites(this, this);
                 break;
+            case R.id.buttonCollegeContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonCollegeStaffContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonClassContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonStreamContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonSemisterContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonDivisionContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonSubjectContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonCollegeStaffSubjectContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+            case R.id.buttonStudentContainer:
+                WebSchoolAttendanceAPI.getUniversites(this, this);
+                break;
+
         }
     }
 
