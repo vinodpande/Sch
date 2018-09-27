@@ -182,33 +182,32 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
                 WebSchoolAttendanceAPI.getUniversites(this, this);
                 break;
             case R.id.buttonCollegeContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getColleges(this, this);
                 break;
             case R.id.buttonCollegeStaffContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getCollegeStaffs(this, this);
                 break;
             case R.id.buttonClassContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getClasses(this, this);
                 break;
             case R.id.buttonStreamContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getStreams(this, this);
                 break;
             case R.id.buttonSemisterContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getSemisters(this, this);
                 break;
             case R.id.buttonDivisionContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getDivisions(this, this);
                 break;
             case R.id.buttonSubjectContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getSubject(this, this);
                 break;
             case R.id.buttonCollegeStaffSubjectContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getCollegeStaffSubject(this, this);
                 break;
             case R.id.buttonStudentContainer:
-                WebSchoolAttendanceAPI.getUniversites(this, this);
+                WebSchoolAttendanceAPI.getStudents(this, this);
                 break;
-
         }
     }
 

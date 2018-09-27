@@ -11,6 +11,14 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 import expertgs.com.constant.Constant;
+import expertgs.com.model.Classes;
+import expertgs.com.model.College_Staff_Subject_Details;
+import expertgs.com.model.Colleges;
+import expertgs.com.model.Colleges_Staff;
+import expertgs.com.model.Divisions;
+import expertgs.com.model.Semisters;
+import expertgs.com.model.Streams;
+import expertgs.com.model.Subject;
 import expertgs.com.model.Universities;
 import expertgs.com.sch.R;
 
@@ -53,6 +61,63 @@ public class AllListAdapter extends BaseAdapter {
             TextView name=convertView.findViewById(R.id.item_view_name);
             name.setText(universities.getUniversityName());
         }
+        if(obj instanceof Colleges){
+            Colleges colleges= (Colleges) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(colleges.getCollegeId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(colleges.getCollegeName());
+        }
+        if(obj instanceof Colleges_Staff){
+            Colleges_Staff collegesStaff= (Colleges_Staff) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(collegesStaff.getCollegeStaffId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(collegesStaff.getCollegeStaffName());
+        }
+        if(obj instanceof College_Staff_Subject_Details){
+            College_Staff_Subject_Details collegeStaffSubjectDetails= (College_Staff_Subject_Details) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(collegeStaffSubjectDetails.getCollegeStaffSubjectId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(collegeStaffSubjectDetails.getSubjectId());
+        }
+        if(obj instanceof Subject){
+            Subject subject= (Subject) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(subject.getSubjectId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(subject.getSubjectName());
+        }
+        if(obj instanceof Semisters){
+            Semisters semisters= (Semisters) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(semisters.getSemisterId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(semisters.getSemisterName());
+        }
+        if(obj instanceof Classes){
+            Classes classes= (Classes) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(classes.getClassId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(classes.getClassName());
+        }
+        if(obj instanceof Streams){
+            Streams streams= (Streams) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(streams.getStreamID()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(streams.getStreamName());
+        }
+        if(obj instanceof Divisions){
+            Divisions divisions= (Divisions) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(divisions.getDivisionId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(divisions.getDivisionName());
+        }
+       
         return convertView;
     }
 
