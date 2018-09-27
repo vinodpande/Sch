@@ -12,8 +12,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import expertgs.com.admin.IUniversal;
 import expertgs.com.constant.Constant;
+import expertgs.com.model.Attendance_Details;
 import expertgs.com.model.Classes;
 import expertgs.com.model.College_Staff_Subject_Details;
 import expertgs.com.model.Colleges;
@@ -100,6 +104,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getColleges(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_COLLEGES);
@@ -149,6 +154,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getCollegeStaffs(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_COLLEGES_STAFF);
@@ -197,10 +203,11 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getClasses(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_CLASSES);
-        Constant.LIST_UNIVERSITIES.clear();
+        Constant.LIST_CLASSES.clear();
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
             @Override
@@ -226,7 +233,7 @@ public class WebSchoolAttendanceAPI {
                         }
                     }
                     if (iUniversal != null) {
-                        iUniversal.changeListUniversal(Constant.LIST_UNIVERSITIES);
+                        iUniversal.changeListUniversal(Constant.LIST_CLASSES);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -241,6 +248,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getSemisters(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_SEMISTER);
@@ -286,6 +294,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getStreams(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_STREAMS);
@@ -332,6 +341,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getDivisions(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_DIVISIONS);
@@ -377,6 +387,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getSubject(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_SUBJECTS);
@@ -388,7 +399,7 @@ public class WebSchoolAttendanceAPI {
                 super.onSuccess(content);
                 Log.i("server Replay", content);
                 Object json = null;
-                Subject  subject;
+                Subject subject;
                 try {
                     json = new JSONTokener(content).nextValue();
                     if (json instanceof JSONObject) {
@@ -425,6 +436,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getCollegeStaffSubject(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_ALL_COLLEGE_STAFF_SUBJECT_DETAILS);
@@ -472,6 +484,7 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
     public static void getStudents(Context context, final IUniversal iUniversal) {
         RequestParams params = new RequestParams();
         params.add("method", GET_All_STUDENT);
@@ -526,7 +539,61 @@ public class WebSchoolAttendanceAPI {
         });
     }
 
-    public static void setUniversites(Context context, final IUniversal iUniversal,Universities universities) {
+    public static void getAttendanceDetails(Context context, final IUniversal iUniversal) {
+        RequestParams params = new RequestParams();
+        params.add("method", GET_ATTENDANCE_DETAILS);
+        Constant.LIST_ATTENDANCE_DETAILS.clear();
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                Object json = null;
+                Attendance_Details attendanceDetails;
+                try {
+                    json = new JSONTokener(content).nextValue();
+                    if (json instanceof JSONObject) {
+                        attendanceDetails = new Attendance_Details();
+                        //attendanceDetails.setStudentId(((JSONObject) json).getString("message"));
+                        attendanceDetails.setStudentId(0);
+                        Constant.LIST_ATTENDANCE_DETAILS.add(attendanceDetails);
+                    } else if (json instanceof JSONArray) {
+                        JSONArray jsonArray = (JSONArray) json;
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            attendanceDetails = new Attendance_Details();
+                            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                            SimpleDateFormat simpleDateForm = new SimpleDateFormat();
+                            //SELECT `ATTENDANCE_ID`, `CREATED_DATETIME`, `COLLEGE_STAFF_ID`, `STUDENT_ID`, `SUBJECT_ID`, `ATTENDANCE_STATUS`, `REASONS`, `ATTENDANCE_DATETIME
+                            attendanceDetails.setAttendanceId(jsonObject.getInt("ATTENDANCE_ID"));
+                            attendanceDetails.setCreatedDateTime(new Date(jsonObject.getInt("CREATED_DATETIME")));
+                            attendanceDetails.setCollegeStaffId(jsonObject.getInt("COLLEGE_STAFF_ID"));
+                            attendanceDetails.setStudentId(jsonObject.getInt("STUDENT_ID"));
+                            attendanceDetails.setSubjectId(jsonObject.getInt("SUBJECT_ID"));
+                            attendanceDetails.setAttendanceStatus(jsonObject.getString("ATTENDANCE_STATUS"));
+                            attendanceDetails.setReasons(jsonObject.getString("REASONS"));
+                            attendanceDetails.setAttendanceDateTime(new Date(jsonObject.getString("ATTENDANCE_DATETIME")));
+                            Constant.LIST_ATTENDANCE_DETAILS.add(attendanceDetails);
+                        }
+                    }
+                    if (iUniversal != null) {
+                        iUniversal.changeListUniversal(Constant.LIST_ATTENDANCE_DETAILS);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setUniversites(Context context, final IUniversal iUniversal, Universities universities) {
         RequestParams params = new RequestParams();
         params.add("method", SET_UNIVERSITIES);
         params.add("univertsity_name", universities.getUniversityName());
@@ -543,7 +610,7 @@ public class WebSchoolAttendanceAPI {
                 Object json = null;
                 Universities universities;
                 try {
-                    JSONObject message=new JSONObject(content);
+                    JSONObject message = new JSONObject(content);
                     if (iUniversal != null) {
                         iUniversal.onUniversalMessage(message.getString("message"));
                     }
@@ -560,4 +627,317 @@ public class WebSchoolAttendanceAPI {
             }
         });
     }
+
+    public static void setColleges(Context context, final IUniversal iUniversal, Colleges colleges) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_COLLEGES);
+        params.add("college_code", colleges.getCollegeCode());
+        params.add("college_name", colleges.getCollegeName());
+        params.add("college_address", colleges.getCollegeAddress());
+        params.add("college_contact", colleges.getCollegeContact());
+        params.add("univertsity_id", String.valueOf(colleges.getUniversityId()));
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setCollegeStaff(Context context, final IUniversal iUniversal, Colleges_Staff collegesStaff) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_COLLEGE_STAFF);
+        params.add("college_staff_name", collegesStaff.getCollegeStaffName());
+        params.add("college_staff_contact", collegesStaff.getCollegeStaffContact());
+        params.add("college_staff_email", collegesStaff.getCollegeStaffEmail());
+        params.add("college_id", String.valueOf(collegesStaff.getCollegeId()));
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setGetAllCollegeStaffSubjectDetails(Context context, final IUniversal iUniversal, College_Staff_Subject_Details collegeStaffSubjectDetails) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_COLLEGE_STAFF_SUBJECT_DETAILS);
+        params.add("college_staff_id", String.valueOf(collegeStaffSubjectDetails.getCollegeStaffId()));
+        params.add("subject_id", String.valueOf(collegeStaffSubjectDetails.getSubjectId()));
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setStudents(Context context, final IUniversal iUniversal, Students students) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_STUDENT);
+        // college_id , student_roll_number , student_name, student_contact, student_email_address, class_id, stream_id, semister_id ,division_id
+        params.add("college_id", String.valueOf(students.getCollegeId()));
+        params.add("student_roll_number", students.getStudentRollNumber());
+        params.add("student_name", students.getStudentName());
+        params.add("student_contact", students.getStudentContact());
+        params.add("student_email_address", students.getStudentEmailId());
+        params.add("class_id", String.valueOf(students.getClassId()));
+        params.add("stream_id", String.valueOf(students.getStreamId()));
+        params.add("semister_id", String.valueOf(students.getSemisterId()));
+        params.add("division_id", String.valueOf(students.getDivisionId()));
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setClasses(Context context, final IUniversal iUniversal, Classes classes) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_CLASS);
+        params.add("class_name", classes.getClassName());
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setSemister(Context context, final IUniversal iUniversal, Semisters semisters) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_SEMISTERS);
+        params.add("semister_name", semisters.getSemisterName());
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setStreams(Context context, final IUniversal iUniversal, Streams streams) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_STREAMS);
+        params.add("stream_name", streams.getStreamName());
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setDivisions(Context context, final IUniversal iUniversal, Divisions divisions) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_DIVISIONS);
+        params.add("division_name", divisions.getDivisionName());
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setSubjects(Context context, final IUniversal iUniversal, Subject subject) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_SUBJECT);
+        //subject_name,semister_id,class_id,stream_id
+        params.add("subject_name", subject.getSubjectName());
+        params.add("semister_id", String.valueOf(subject.getSemisterId()));
+        params.add("class_id", String.valueOf(subject.getClassId()));
+        params.add("stream_id", String.valueOf(subject.getStreamId()));
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+    public static void setAttendanceDetails(Context context, final IUniversal iUniversal, Attendance_Details attendanceDetails) {
+        RequestParams params = new RequestParams();
+        params.add("method", SET_ATTENDANCE_DETAILS);
+        //college_staff_id
+        //  student_id
+        //  subject_id
+        //  attendance_status
+        //  reasons
+        //  attendance_datetime
+        params.add("college_staff_id", String.valueOf(attendanceDetails.getCollegeStaffId()));
+        params.add("student_id", String.valueOf(attendanceDetails.getStudentId()));
+        params.add("subject_id", String.valueOf(attendanceDetails.getSubjectId()));
+        params.add("attendance_status", attendanceDetails.getAttendanceStatus());
+        params.add("reasons", attendanceDetails.getReasons());
+        params.add("attendance_datetime", String.valueOf(attendanceDetails.getAttendanceDateTime()));
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(context, SERVICE_URL, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                Log.i("server Replay", content);
+                try {
+                    JSONObject message = new JSONObject(content);
+                    if (iUniversal != null) {
+                        iUniversal.onUniversalMessage(message.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                Log.i("server Replay", content);
+            }
+        });
+    }
+
+
 }

@@ -11,6 +11,15 @@ public class Attendance_Details {
     private String attendanceStatus;
     private String Reasons;
     private Date attendanceDateTime;
+    private Date createdDateTime;
+
+    public Date getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(Date createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
 
     public int getCollegeStaffId() {
         return collegeStaffId;

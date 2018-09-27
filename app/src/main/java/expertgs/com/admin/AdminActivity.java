@@ -117,6 +117,7 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
                         list.getView().setVisibility(View.VISIBLE);
                         LIST_VIEW_ALL.setVisibility(View.VISIBLE);
                         //call get data when view is visible
+                        clearDataSetList();
                         getDataFromService(view.getId());
                         for (int j = 0; j < LAYOUT_CONTAINER.size(); j++) {
                             AdminListLayout sublist = LAYOUT_CONTAINER.get(j);
@@ -174,6 +175,10 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     void setListView(ArrayList list) {
         allListAdapter=new AllListAdapter(this, list);
         LIST_VIEW_ALL.setAdapter(allListAdapter);
+    }
+    void clearDataSetList(){
+        allListAdapter.list.clear();
+        allListAdapter.notifyDataSetChanged();
     }
 
     void getDataFromService(int id) {

@@ -2,7 +2,6 @@ package expertgs.com.admin;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import expertgs.com.model.College_Staff_Subject_Details;
 import expertgs.com.model.Colleges;
 import expertgs.com.model.Colleges_Staff;
@@ -12,7 +11,6 @@ import expertgs.com.model.Streams;
 import expertgs.com.model.Students;
 import expertgs.com.model.Subject;
 import expertgs.com.model.Universities;
-
 public interface IUniversal {
     void changeListUniversal(ArrayList list);
     void onUniversalMessage(String message);

@@ -8,9 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
-
-import expertgs.com.constant.Constant;
 import expertgs.com.model.Classes;
 import expertgs.com.model.College_Staff_Subject_Details;
 import expertgs.com.model.Colleges;
@@ -18,6 +15,7 @@ import expertgs.com.model.Colleges_Staff;
 import expertgs.com.model.Divisions;
 import expertgs.com.model.Semisters;
 import expertgs.com.model.Streams;
+import expertgs.com.model.Students;
 import expertgs.com.model.Subject;
 import expertgs.com.model.Universities;
 import expertgs.com.sch.R;
@@ -52,7 +50,6 @@ public class AllListAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).
                     inflate(R.layout.all_list_view_admin, parent, false);
         }
-
         Object obj=getItem(position);
         if(obj instanceof Universities){
             Universities universities= (Universities) list.get(position);
@@ -80,7 +77,7 @@ public class AllListAdapter extends BaseAdapter {
             TextView id=convertView.findViewById(R.id.item_view_id);
             id.setText(String.valueOf(collegeStaffSubjectDetails.getCollegeStaffSubjectId()));
             TextView name=convertView.findViewById(R.id.item_view_name);
-            name.setText(collegeStaffSubjectDetails.getSubjectId());
+            name.setText(String.valueOf(collegeStaffSubjectDetails.getSubjectId()));
         }
         if(obj instanceof Subject){
             Subject subject= (Subject) list.get(position);
@@ -117,9 +114,13 @@ public class AllListAdapter extends BaseAdapter {
             TextView name=convertView.findViewById(R.id.item_view_name);
             name.setText(divisions.getDivisionName());
         }
-       
+        if(obj instanceof Students){
+            Students students= (Students) list.get(position);
+            TextView id=convertView.findViewById(R.id.item_view_id);
+            id.setText(String.valueOf(students.getStudentId()));
+            TextView name=convertView.findViewById(R.id.item_view_name);
+            name.setText(students.getStudentName());
+        }
         return convertView;
     }
-
-
 }

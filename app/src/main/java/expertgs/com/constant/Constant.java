@@ -2,6 +2,7 @@ package expertgs.com.constant;
 
 import java.util.ArrayList;
 
+import expertgs.com.model.Attendance_Details;
 import expertgs.com.model.Classes;
 import expertgs.com.model.College_Staff_Subject_Details;
 import expertgs.com.model.Colleges;
@@ -23,5 +24,6 @@ public class Constant {
     public static ArrayList<Divisions> LIST_DIVISION=new ArrayList<>();
     public static ArrayList<Subject> LIST_SUBJECTS=new ArrayList<>();
     public static ArrayList<Students> LIST_STUDENT=new ArrayList<>();
+    public static ArrayList<Attendance_Details> LIST_ATTENDANCE_DETAILS=new ArrayList<>();
     public static ArrayList<College_Staff_Subject_Details> LIST_COLLEGE_STAFF_SUBJECTS=new ArrayList<>();
 }

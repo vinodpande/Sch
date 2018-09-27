@@ -26,8 +26,8 @@
                     android:id="@+id/buttonUniversityContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="collabsConatiner"
                     android:gravity="left|center"
+                    android:onClick="collabsConatiner"
                     android:text="University" />
 
                 <LinearLayout
@@ -40,26 +40,26 @@
                     <EditText
                         android:id="@+id/editUniversityName"
                         android:layout_width="match_parent"
-                        android:hint="Name"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:hint="Name" />
 
                     <EditText
                         android:id="@+id/editUniversityCode"
                         android:layout_width="match_parent"
-                        android:hint="Code"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:hint="Code" />
 
                     <EditText
                         android:id="@+id/editUniversityContact"
                         android:layout_width="match_parent"
-                        android:hint="contact"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:hint="contact" />
 
                     <EditText
                         android:id="@+id/editUniversityAddress"
                         android:layout_width="match_parent"
-                        android:hint="Address"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:hint="Address" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -69,32 +69,33 @@
                         android:padding="2dp">
 
                         <Button
-                            android:onClick="saveUniversity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:onClick="saveUniversity"
                             android:text="Save" />
 
                         <Button
-                            android:onClick="clearUniversity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:onClick="clearUniversity"
                             android:text="Clear" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutCollegeMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFFFF"
-                android:id="@+id/layoutCollegeMainContainer"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/buttonCollegeContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="collabsConatiner"
                     android:gravity="left|center"
+                    android:onClick="collabsConatiner"
                     android:text="College" />
 
                 <LinearLayout
@@ -103,6 +104,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
+
+                    <Spinner
+                        android:id="@+id/spinnerUniversityName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </Spinner>
 
                     <EditText
                         android:id="@+id/editCollegeName"
@@ -143,6 +151,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/layoutCollegeStaffMainContainer"
                 android:layout_width="match_parent"
@@ -156,6 +165,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center"
                     android:onClick="collabsConatiner"
+
                     android:text="College Staff" />
 
                 <LinearLayout
@@ -164,14 +174,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
+                    <Spinner
+                        android:id="@+id/spinnerCollegeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </Spinner>
+
 
                     <EditText
                         android:id="@+id/editCollegeStaffName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editCollegeStaffCode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -204,11 +216,12 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutClassMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFFFF"
-                android:id="@+id/layoutClassMainContainer"
                 android:orientation="vertical">
 
                 <Button
@@ -228,21 +241,7 @@
 
                     <EditText
                         android:id="@+id/editClassName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editClassCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editClassContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editClassAddress"
+                        android:hint="Class Name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -265,11 +264,12 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutStreamMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFFFF"
-                android:id="@+id/layoutStreamMainContainer"
                 android:orientation="vertical">
 
                 <Button
@@ -290,21 +290,7 @@
                     <EditText
                         android:id="@+id/editStreamName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editStreamCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editStreamContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editStreamAddress"
-                        android:layout_width="match_parent"
+                        android:hint="Stream Name"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
@@ -326,11 +312,12 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutSemisterMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFFFF"
-                android:id="@+id/layoutSemisterMainContainer"
                 android:orientation="vertical">
 
                 <Button
@@ -351,21 +338,7 @@
                     <EditText
                         android:id="@+id/editSemisterName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editSemisterCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editSemisterContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editSemisterAddress"
-                        android:layout_width="match_parent"
+                        android:hint="Semester Name"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
@@ -387,11 +360,12 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutDivisionMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFFFF"
-                android:id="@+id/layoutDivisionMainContainer"
                 android:orientation="vertical">
 
                 <Button
@@ -412,21 +386,7 @@
                     <EditText
                         android:id="@+id/editDivisionName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editDivisionCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editDivisionContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editDivisionAddress"
-                        android:layout_width="match_parent"
+                        android:hint="Division Name"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
@@ -448,10 +408,11 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutSubjectMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/layoutSubjectMainContainer"
                 android:background="#FFFFFFFF"
                 android:orientation="vertical">
 
@@ -461,7 +422,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="left|center"
                     android:onClick="collabsConatiner"
-
                     android:text="Subject" />
 
                 <LinearLayout
@@ -470,25 +430,22 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
-
+                    <Spinner
+                        android:id="@+id/spinnerClassName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:id="@+id/spinnerStreamName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:id="@+id/spinnerSemesterName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
                     <EditText
                         android:id="@+id/editSubjectName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editSubjectCode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editSubjectContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editSubjectAddress"
-                        android:layout_width="match_parent"
+                        android:hint="Subject Name"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
@@ -510,11 +467,12 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutCollegeStaffSubjectMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFFFF"
-                android:id="@+id/layoutCollegeStaffSubjectMainContainer"
                 android:orientation="vertical">
 
                 <Button
@@ -532,25 +490,14 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
-                    <EditText
-                        android:id="@+id/editCollegeStaffSubjectName"
+                    <Spinner
+                        android:id="@+id/spinnerStaffName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editCollegeStaffSubjectCode"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:id="@+id/spinnerSubjectName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editCollegeStaffSubjectContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/editCollegeStaffSubjectAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -571,11 +518,12 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/layoutStudentMainContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFFFF"
-                android:id="@+id/layoutStudentMainContainer"
                 android:orientation="vertical">
 
                 <Button
@@ -590,20 +538,43 @@
                     android:id="@+id/layoutStudentContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <Spinner
+                        android:id="@+id/spinnerStudCollegeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:id="@+id/spinnerStudClassName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:id="@+id/spinnerStudStreamName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:id="@+id/spinnerStudSemesterName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:id="@+id/spinnerStudDivisionName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                     <EditText
                         android:id="@+id/editStudentName"
                         android:layout_width="match_parent"
+                        android:hint="Student Name"
                         android:layout_height="wrap_content" />
 
                     <EditText
-                        android:id="@+id/editStudentCode"
+                        android:id="@+id/editStudentRollNumber"
                         android:layout_width="match_parent"
+                        android:hint="Student Roll Number"
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:hint="Student Contact"
                         android:id="@+id/editStudentContact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -611,6 +582,7 @@
                     <EditText
                         android:id="@+id/editStudentAddress"
                         android:layout_width="match_parent"
+                        android:hint="Student Address"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
@@ -632,6 +604,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <ListView
                 android:id="@+id/list_view_all"
                 android:layout_width="match_parent"
