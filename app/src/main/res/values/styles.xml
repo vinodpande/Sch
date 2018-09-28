@@ -8,4 +8,23 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AdminViewMainContainer">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginBottom">5dip</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:background">@drawable/admin_main_container_background</item>
+    </style>
+
+    <style name="AdminViewMainContainerButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:onClick">collabsConatiner</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:background">@drawable/admin_main_container_button_background</item>
+    </style>
+
+
 </resources>

@@ -3,20 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="@color/colorPrimary"
+    android:padding="4dp"
     android:weightSum="1">
 
     <TextView
         android:id="@+id/item_view_id"
-        android:background="@color/colorPrimary"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.10" />
 
     <TextView
         android:id="@+id/item_view_name"
-        android:background="@color/colorPrimary"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8" />
+        android:layout_weight="0.90" />
 </LinearLayout>
