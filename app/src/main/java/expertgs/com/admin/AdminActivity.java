@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,13 +26,26 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     ListView LIST_VIEW_ALL;
     AllListAdapter allListAdapter;
 
+    Spinner SPIN_UNIVERSITY_NAME;
+    EditText EDIT_COLLEGE_NAME;
+    EditText EDIT_COLLEGE_CODE;
+    EditText EDIT_COLLEGE_CONTACT;
+    EditText EDIT_COLLEGE_ADDRESS;
+
+    Spinner SPIN_COLLEGE_NAME;
+    EditText EDIT_COLLEGE_STAFF_NAME;
+    EditText EDIT_COLLEGE_STAFF_CONTACT;
+    EditText EDIT_COLLEGE_STAFF_EMAIL_ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         LIST_VIEW_ALL = findViewById(R.id.list_view_all);
         setListView(new ArrayList());
+        initUIComponent();
         initContainer();
+
     }
 
     void initContainer() {
@@ -140,12 +154,26 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
         }
     }
 
-    void initUniversity() {
+    void initUIComponent() {
+
         EDIT_UNIVERSITY_NAME = findViewById(R.id.editUniversityName);
         EDIT_UNIVERSITY_CODE = findViewById(R.id.editUniversityCode);
         EDIT_UNIVERSITY_CONTACT = findViewById(R.id.editUniversityContact);
         EDIT_UNIVERSITY_ADDRESS = findViewById(R.id.editUniversityAddress);
+
+        SPIN_UNIVERSITY_NAME = findViewById(R.id.spinnerUniversityName);
+        EDIT_COLLEGE_NAME = findViewById(R.id.editCollegeName);
+        EDIT_COLLEGE_CODE = findViewById(R.id.editCollegeCode);
+        EDIT_COLLEGE_CONTACT = findViewById(R.id.editCollegeContact);
+        EDIT_COLLEGE_ADDRESS = findViewById(R.id.editCollegeAddress);
+
+        SPIN_COLLEGE_NAME = findViewById(R.id.spinnerCollegeName);
+        EDIT_COLLEGE_STAFF_NAME = findViewById(R.id.editCollegeStaffName);
+        EDIT_COLLEGE_STAFF_CONTACT = findViewById(R.id.editCollegeStaffContact);
+        EDIT_COLLEGE_STAFF_EMAIL_ID = findViewById(R.id.editCollegeStaffEmilID);
+
     }
+
 
     Universities setUniversity() {
         Universities universities = new Universities();
@@ -173,10 +201,11 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     }
 
     void setListView(ArrayList list) {
-        allListAdapter=new AllListAdapter(this, list);
+        allListAdapter = new AllListAdapter(this, list);
         LIST_VIEW_ALL.setAdapter(allListAdapter);
     }
-    void clearDataSetList(){
+
+    void clearDataSetList() {
         allListAdapter.list.clear();
         allListAdapter.notifyDataSetChanged();
     }
@@ -184,7 +213,6 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     void getDataFromService(int id) {
         switch (id) {
             case R.id.buttonUniversityContainer:
-                initUniversity();
                 WebSchoolAttendanceAPI.getUniversites(this, this);
                 break;
             case R.id.buttonCollegeContainer:
@@ -220,11 +248,12 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     @Override
     public void changeListUniversal(ArrayList list) {
         if (list.size() > 0) {
-            if(allListAdapter.list!=null){
-            allListAdapter.list.clear();
-            allListAdapter.list.addAll(list);
-            allListAdapter.notifyDataSetChanged();
-            LIST_VIEW_ALL.invalidate();}
+            if (allListAdapter.list != null) {
+                allListAdapter.list.clear();
+                allListAdapter.list.addAll(list);
+                allListAdapter.notifyDataSetChanged();
+                LIST_VIEW_ALL.invalidate();
+            }
         }
     }
 

@@ -178,23 +178,25 @@
                         android:id="@+id/spinnerCollegeName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                     </Spinner>
 
 
                     <EditText
                         android:id="@+id/editCollegeStaffName"
                         android:layout_width="match_parent"
+                        android:hint="Staff Name"
                         android:layout_height="wrap_content" />
 
                     <EditText
                         android:id="@+id/editCollegeStaffContact"
                         android:layout_width="match_parent"
+                        android:hint="Staff Contact"
                         android:layout_height="wrap_content" />
 
                     <EditText
-                        android:id="@+id/editCollegeStaffAddress"
+                        android:id="@+id/editCollegeStaffEmilID"
                         android:layout_width="match_parent"
+                        android:hint="Staff Email Id"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
