@@ -4,14 +4,26 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import expertgs.com.constant.AdminListLayout;
+import expertgs.com.constant.Constant;
+import expertgs.com.model.Classes;
+import expertgs.com.model.College_Staff_Subject_Details;
+import expertgs.com.model.Colleges;
+import expertgs.com.model.Colleges_Staff;
+import expertgs.com.model.Divisions;
+import expertgs.com.model.Semisters;
+import expertgs.com.model.Streams;
+import expertgs.com.model.Students;
+import expertgs.com.model.Subject;
 import expertgs.com.model.Universities;
 import expertgs.com.sch.R;
 import expertgs.com.webservices.WebSchoolAttendanceAPI;
@@ -25,6 +37,7 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     EditText EDIT_UNIVERSITY_ADDRESS;
     ListView LIST_VIEW_ALL;
     AllListAdapter allListAdapter;
+    AllListAdapter allListAdapterSpinners;
 
     Spinner SPIN_UNIVERSITY_NAME;
     EditText EDIT_COLLEGE_NAME;
@@ -42,10 +55,9 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         LIST_VIEW_ALL = findViewById(R.id.list_view_all);
-        setListView(new ArrayList());
         initUIComponent();
         initContainer();
-
+        setListView(new ArrayList());
     }
 
     void initContainer() {
@@ -133,6 +145,7 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
                         //call get data when view is visible
                         clearDataSetList();
                         getDataFromService(view.getId());
+                        setSpinners(view.getId());
                         for (int j = 0; j < LAYOUT_CONTAINER.size(); j++) {
                             AdminListLayout sublist = LAYOUT_CONTAINER.get(j);
                             if (view.getId() == sublist.getId()) {
@@ -203,11 +216,48 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     void setListView(ArrayList list) {
         allListAdapter = new AllListAdapter(this, list);
         LIST_VIEW_ALL.setAdapter(allListAdapter);
+
     }
+
 
     void clearDataSetList() {
         allListAdapter.list.clear();
         allListAdapter.notifyDataSetChanged();
+    }
+
+    void setSpinners(int id) {
+        switch (id) {
+            case R.id.buttonUniversityContainer:
+
+                break;
+            case R.id.buttonCollegeContainer:
+                SPIN_UNIVERSITY_NAME.setAdapter(genrateArrayAdaper(Constant.LIST_UNIVERSITIES));
+                break;
+            case R.id.buttonCollegeStaffContainer:
+                SPIN_COLLEGE_NAME.setAdapter(genrateArrayAdaper(Constant.LIST_COLLEGES));
+                break;
+            case R.id.buttonClassContainer:
+
+                break;
+            case R.id.buttonStreamContainer:
+
+                break;
+            case R.id.buttonSemisterContainer:
+
+                break;
+            case R.id.buttonDivisionContainer:
+
+                break;
+            case R.id.buttonSubjectContainer:
+
+                break;
+            case R.id.buttonCollegeStaffSubjectContainer:
+
+                break;
+            case R.id.buttonStudentContainer:
+
+                break;
+        }
     }
 
     void getDataFromService(int id) {
@@ -243,6 +293,83 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
                 WebSchoolAttendanceAPI.getStudents(this, this);
                 break;
         }
+    }
+
+    ArrayAdapter genrateArrayAdaper(List list) {
+        Object obj = list.get(0);
+        ArrayList arrayList=new ArrayList();
+        if (obj instanceof Universities) {
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Universities universities= (Universities) list.get(i);
+                arrayList.add(universities.getUniversityName());
+            }
+        }
+        if (obj instanceof Colleges) {
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Colleges colleges= (Colleges) list.get(i);
+                arrayList.add(colleges.getCollegeName());
+            }
+        }
+        if (obj instanceof Colleges_Staff) {
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Colleges_Staff collegesStaff = (Colleges_Staff) list.get(i);
+                arrayList.add(collegesStaff.getCollegeStaffName());
+            }
+        }
+        if (obj instanceof College_Staff_Subject_Details) {
+
+            // Name Not available
+        }
+        if (obj instanceof Subject) {
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Subject subject = (Subject) list.get(i);
+                arrayList.add(subject.getSubjectName());
+            }
+        }
+        if (obj instanceof Semisters) {
+
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Semisters semisters = (Semisters) list.get(i);
+                arrayList.add(semisters.getSemisterName());
+            }
+        }
+        if (obj instanceof Classes) {
+
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Classes classes = (Classes) list.get(i);
+                arrayList.add(classes.getClassName());
+            }
+        }
+        if (obj instanceof Streams) {
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Streams streams = (Streams) list.get(i);
+                arrayList.add(streams.getStreamName());
+            }
+        }
+        if (obj instanceof Divisions) {
+
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Divisions divisions = (Divisions) list.get(i);
+                arrayList.add(divisions.getDivisionName());
+            }
+        }
+        if (obj instanceof Students) {
+            arrayList.clear();
+            for (int i = 0; i < list.size(); i++) {
+                Students students = (Students) list.get(i);
+                arrayList.add(students.getStudentName());
+            }
+        }
+
+        return new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,arrayList);
     }
 
     @Override
