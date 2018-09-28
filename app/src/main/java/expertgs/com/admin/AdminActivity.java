@@ -127,7 +127,7 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
                                 sublist.getMainView().setVisibility(View.GONE);
                             }
                         }
-                        initUniversity();
+
                     }
                     // open
                 } else {
@@ -184,6 +184,7 @@ public class AdminActivity extends AppCompatActivity implements IUniversal {
     void getDataFromService(int id) {
         switch (id) {
             case R.id.buttonUniversityContainer:
+                initUniversity();
                 WebSchoolAttendanceAPI.getUniversites(this, this);
                 break;
             case R.id.buttonCollegeContainer:
